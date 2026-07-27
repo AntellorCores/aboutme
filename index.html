@@ -1,1 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Quick-Draw Guide to Playing Everyone Will Love</title>
+<style>
 
+:root {
+    color-scheme: dark;
+    --bg: #0b0b0d;
+    --panel: #17171c;
+    --panel-2: #202027;
+    --text: #f1eee7;
+    --muted: #b6b0a5;
+    --gold: #d9b65d;
+    --red: #a52a2a;
+    --red-bright: #ef5350;
+    --border: #393944;
+    --shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+
+* { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at top, rgba(165,42,42,.12), transparent 28rem),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+button, input, summary {
+    font: inherit;
+}
+
+header {
+    padding: 1.35rem 1rem 1.15rem;
+    text-align: center;
+    background: rgba(20,20,24,.96);
+    border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+    margin: 0;
+    color: var(--gold);
+    font-size: clamp(1.65rem, 7vw, 2.7rem);
+    line-height: 1.1;
+    letter-spacing: .02em;
+}
+
+header p {
+    margin: .55rem auto 0;
+    max-width: 42rem;
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+.toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: .7rem;
+    background: rgba(11,11,13,.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+nav {
+    display: flex;
+    gap: .5rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: .55rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav button {
+    flex: 0 0 auto;
+    min-height: 46px;
+    padding: .72rem .95rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    touch-action: manipulation;
+}
+
+nav button:hover,
+nav button:focus-visible,
+nav button[aria-selected="true"] {
+    background: #542020;
+    border-color: #a94a4a;
+    outline: none;
+}
+
+nav button:active {
+    transform: scale(.98);
+}
+
+.search-wrap {
+    position: relative;
+}
+
+#search {
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: .8rem 1rem .8rem 2.65rem;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    outline: none;
+}
+
+#search:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(217,182,93,.13);
+}
+
+.search-wrap::before {
+    content: "⌕";
+    position: absolute;
+    left: .95rem;
+    top: 50%;
+    transform: translateY(-52%);
+    color: var(--muted);
+    font-size: 1.35rem;
+    pointer-events: none;
+}
+
+main {
+    width: min(100%, 1040px);
+    margin: 0 auto;
+    padding: 1rem .85rem 5rem;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+    animation: fadeIn .2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    margin: .3rem 0 1rem;
+    color: var(--gold);
+    font-size: clamp(1.45rem, 6vw, 2rem);
+    line-height: 1.2;
+}
+
+.card {
+    background: linear-gradient(180deg, rgba(31,31,38,.98), rgba(22,22,27,.98));
+    padding: 1rem;
+    margin: .85rem 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.warning {
+    margin: .2rem 0 1rem;
+    padding: .95rem 1rem;
+    border: 2px solid var(--red-bright);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #5d1111, #2a1012);
+    color: #fff;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: .035em;
+    box-shadow: 0 0 0 4px rgba(239,83,80,.08);
+}
+
+.lore-empty {
+    min-height: 42vh;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    border: 1px dashed #50505c;
+    border-radius: 16px;
+    background: rgba(23,23,28,.65);
+    color: var(--muted);
+    text-align: center;
+}
+
+.lore-empty p {
+    margin: 0;
+    max-width: 28rem;
+}
+
+details {
+    margin: .65rem 0;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: .8rem .9rem;
+    color: #f6e6b4;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    touch-action: manipulation;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 1.25rem;
+    color: var(--gold);
+}
+
+details[open] summary::after { content: "−"; }
+
+details > :not(summary) {
+    margin-left: .9rem;
+    margin-right: .9rem;
+}
+
+details > :last-child {
+    margin-bottom: .9rem;
+}
+
+p { margin-top: .65rem; }
+b { color: #f5d985; }
+
+@media (min-width: 760px) {
+    .toolbar {
+        padding: .8rem 1rem;
+    }
+
+    .toolbar-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: .8rem;
+        align-items: center;
+    }
+
+    nav {
+        padding-bottom: 0;
+    }
+
+    main {
+        padding: 1.5rem 1.2rem 5rem;
+    }
+
+    .card {
+        padding: 1.25rem 1.35rem;
+    }
+}
+
+@media (max-width: 420px) {
+    header {
+        padding-top: 1rem;
+    }
+
+    header p {
+        font-size: .88rem;
+    }
+
+    .toolbar {
+        padding: .55rem;
+    }
+
+    nav button {
+        min-height: 44px;
+        padding: .65rem .82rem;
+        font-size: .9rem;
+    }
+
+    main {
+        padding-left: .65rem;
+        padding-right: .65rem;
+    }
+
+    .card {
+        border-radius: 13px;
+        padding: .9rem;
+    }
+}
+
+
+.rule-lead {
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+.rule-grid {
+    display: grid;
+    gap: .55rem;
+}
+.rule-line {
+    padding: .7rem .8rem;
+    border-left: 3px solid #765f2c;
+    background: rgba(255,255,255,.025);
+    border-radius: 0 9px 9px 0;
+}
+.rule-line strong {
+    color: #f5d985;
+}
+.formula {
+    display: block;
+    margin: .7rem 0;
+    padding: .8rem;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #111116;
+    color: #f7e8bd;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+}
+th, td {
+    padding: .55rem .45rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+}
+th {
+    position: sticky;
+    top: 0;
+    background: #24242b;
+    color: #f5d985;
+}
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+ul {
+    padding-left: 1.25rem;
+}
+li + li {
+    margin-top: .35rem;
+}
+.term {
+    color: #f5d985;
+    font-weight: 700;
+}
+
+
+.feature-anchor {
+    scroll-margin-top: 8.5rem;
+}
+.feature-link {
+    color: #f5d985;
+    text-decoration: underline;
+    text-decoration-thickness: .08em;
+    text-underline-offset: .16em;
+}
+.feature-link:hover,
+.feature-link:focus-visible {
+    color: #fff3c8;
+    outline: none;
+}
+
+/* Non-scrolling responsive tab layout */
+nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .5rem;
+    width: 100%;
+    overflow: visible !important;
+    padding-bottom: .55rem;
+}
+
+nav button {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: .7rem .45rem;
+    border-radius: 12px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.15;
+    text-align: center;
+}
+
+@media (min-width: 760px) {
+    nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    nav button {
+        min-height: 44px;
+        padding: .62rem .3rem;
+        font-size: .82rem;
+    }
+}
+
+
+/* Responsive tab-label sizing */
+nav {
+    container-type: inline-size;
+}
+
+nav button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    overflow: hidden;
+    text-wrap: balance;
+    font-size: clamp(.72rem, 3.2cqw, .95rem);
+    line-height: 1.1;
+}
+
+@media (max-width: 360px) {
+    nav button {
+        font-size: clamp(.66rem, 3.5cqw, .82rem);
+        padding-left: .22rem;
+        padding-right: .22rem;
+    }
+}
+
+@supports not (font-size: 1cqw) {
+    nav button {
+        font-size: clamp(.72rem, 2.9vw, .95rem);
+    }
+
+    @media (max-width: 360px) {
+        nav button {
+            font-size: clamp(.66rem, 3vw, .82rem);
+        }
+    }
+}
+
+
+/* Aged dark manuscript theme */
+:root {
+    --bg: #0d0b09;
+    --panel: #17130f;
+    --panel-2: #211a14;
+    --text: #e6dcc8;
+    --muted: #b8aa91;
+    --gold: #c3a56a;
+    --red: #6f2722;
+    --red-bright: #b95045;
+    --border: #4a3a2b;
+    --shadow: 0 10px 28px rgba(0, 0, 0, .42);
+}
+
+body {
+    background:
+        linear-gradient(rgba(255,255,255,.012), rgba(255,255,255,.006)),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.012) 0,
+            rgba(255,255,255,.012) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        radial-gradient(circle at top, rgba(117, 74, 37, .18), transparent 30rem),
+        #0d0b09;
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+header {
+    background:
+        linear-gradient(180deg, rgba(39, 29, 20, .98), rgba(20, 16, 13, .98));
+    border-bottom: 1px solid #6a5137;
+    box-shadow: inset 0 -1px 0 rgba(195, 165, 106, .18);
+}
+
+header h1 {
+    color: #d2b77d;
+    letter-spacing: .055em;
+    text-transform: uppercase;
+    text-shadow:
+        0 1px 0 #000,
+        0 0 14px rgba(195, 165, 106, .16);
+}
+
+header p {
+    color: #b9aa91;
+    font-style: italic;
+}
+
+.toolbar {
+    background: rgba(15, 12, 10, .96);
+    border-bottom: 1px solid #4b3828;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .28);
+}
+
+nav button {
+    background:
+        linear-gradient(180deg, #2a2119, #17120e);
+    color: #e8dcc4;
+    border: 1px solid #5a4430;
+    border-radius: 6px;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        inset 0 -1px 0 rgba(0,0,0,.45);
+    text-transform: uppercase;
+    letter-spacing: .035em;
+    font-weight: 700;
+}
+
+nav button:hover,
+nav button:focus-visible,
+nav button[aria-selected="true"] {
+    background:
+        linear-gradient(180deg, #593228, #2b1713);
+    border-color: #9d6555;
+    color: #f5e6c7;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 1px rgba(195,165,106,.12);
+}
+
+#search {
+    background:
+        linear-gradient(180deg, #1b1612, #110e0c);
+    border-color: #4f3d2d;
+    border-radius: 7px;
+    color: #eadfc9;
+    box-shadow: inset 0 1px 6px rgba(0,0,0,.45);
+}
+
+#search::placeholder {
+    color: #8f806b;
+    font-style: italic;
+}
+
+#search:focus {
+    border-color: #b18b52;
+    box-shadow:
+        inset 0 1px 6px rgba(0,0,0,.45),
+        0 0 0 2px rgba(195,165,106,.12);
+}
+
+h2, h3 {
+    color: #d0b276;
+    letter-spacing: .025em;
+    text-shadow: 0 1px 0 #000;
+}
+
+h2 {
+    border-bottom: 1px solid #4c3928;
+    padding-bottom: .45rem;
+}
+
+.card {
+    position: relative;
+    background:
+        linear-gradient(180deg, rgba(39,31,24,.97), rgba(22,17,13,.98));
+    border: 1px solid #4c3928;
+    border-radius: 7px;
+    box-shadow:
+        var(--shadow),
+        inset 0 0 0 1px rgba(195,165,106,.025);
+}
+
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+}
+
+.card::before {
+    top: 6px;
+    left: 6px;
+    border-top: 1px solid rgba(195,165,106,.28);
+    border-left: 1px solid rgba(195,165,106,.28);
+}
+
+.card::after {
+    right: 6px;
+    bottom: 6px;
+    border-right: 1px solid rgba(195,165,106,.22);
+    border-bottom: 1px solid rgba(195,165,106,.22);
+}
+
+.warning {
+    background:
+        linear-gradient(180deg, #4b211c, #24110e);
+    border-color: #9b493f;
+    border-radius: 5px;
+    color: #f0d8bd;
+    letter-spacing: .055em;
+    text-shadow: 0 1px 0 #000;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.025),
+        0 6px 18px rgba(0,0,0,.28);
+}
+
+.lore-empty {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.012) 0,
+            rgba(255,255,255,.012) 1px,
+            transparent 1px,
+            transparent 5px
+        ),
+        rgba(26, 20, 15, .74);
+    border-color: #55402d;
+    border-radius: 6px;
+}
+
+details {
+    background:
+        linear-gradient(180deg, rgba(40,31,23,.98), rgba(27,21,16,.98));
+    border-color: #4e3a29;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+summary {
+    color: #ddc28b;
+    letter-spacing: .018em;
+}
+
+summary::after {
+    color: #b99a61;
+}
+
+.rule-line {
+    border-left-color: #84673c;
+    background: rgba(255,255,255,.018);
+}
+
+.formula {
+    background: #110e0b;
+    border-color: #4a3828;
+    color: #dbc18b;
+    border-radius: 5px;
+}
+
+.table-wrap {
+    border-color: #4a3828;
+    border-radius: 5px;
+}
+
+table {
+    background: rgba(17, 13, 10, .5);
+}
+
+th {
+    background: #2a2119;
+    color: #dec18a;
+}
+
+th, td {
+    border-bottom-color: #443326;
+}
+
+.feature-link {
+    color: #d1b070;
+}
+
+.feature-link:hover,
+.feature-link:focus-visible {
+    color: #f0d59c;
+}
+
+b, .term {
+    color: #dcc088;
+}
+
+::selection {
+    background: #6b3d2f;
+    color: #fff0d6;
+}
+
+
+/* Final tab fitting and search typeahead */
+nav button {
+    white-space: nowrap !important;
+    text-wrap: nowrap !important;
+    overflow: hidden;
+    letter-spacing: .012em;
+    font-size: clamp(.66rem, 3cqw, .9rem);
+    padding-left: .28rem;
+    padding-right: .28rem;
+}
+
+.search-wrap {
+    z-index: 30;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + .35rem);
+    left: 0;
+    right: 0;
+    display: none;
+    max-height: min(48vh, 22rem);
+    overflow-y: auto;
+    padding: .3rem;
+    border: 1px solid #604a35;
+    border-radius: 7px;
+    background:
+        linear-gradient(180deg, rgba(38, 29, 22, .99), rgba(18, 14, 11, .99));
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .55);
+}
+
+.search-suggestions.visible {
+    display: block;
+}
+
+.search-suggestion {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .65rem;
+    align-items: center;
+    min-height: 44px;
+    padding: .65rem .7rem;
+    border: 0;
+    border-bottom: 1px solid rgba(104, 79, 54, .45);
+    border-radius: 4px;
+    background: transparent;
+    color: #eadfc9;
+    text-align: left;
+    cursor: pointer;
+}
+
+.search-suggestion:last-child {
+    border-bottom: 0;
+}
+
+.search-suggestion:hover,
+.search-suggestion:focus-visible,
+.search-suggestion.active {
+    outline: none;
+    background: rgba(111, 65, 47, .52);
+}
+
+.search-suggestion-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.search-suggestion-section {
+    color: #aa987b;
+    font-size: .76rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+}
+
+.search-no-results {
+    padding: .75rem;
+    color: #a99980;
+    font-style: italic;
+    text-align: center;
+}
+
+@media (max-width: 360px) {
+    nav button {
+        font-size: .64rem;
+        letter-spacing: 0;
+        padding-left: .16rem;
+        padding-right: .16rem;
+    }
+
+    .search-suggestion {
+        gap: .35rem;
+        padding-left: .55rem;
+        padding-right: .55rem;
+    }
+
+    .search-suggestion-section {
+        font-size: .68rem;
+    }
+}
+
+
+.search-index-target {
+    scroll-margin-top: 9rem;
+}
+
+.search-flash {
+    animation: searchFlash 1.35s ease-out;
+}
+
+@keyframes searchFlash {
+    0%, 35% {
+        background-color: rgba(195, 165, 106, .24);
+        box-shadow: 0 0 0 2px rgba(195, 165, 106, .24);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+
+/* Larger, more readable tab labels */
+nav button {
+    white-space: normal !important;
+    text-wrap: balance !important;
+    overflow: visible;
+    min-height: 54px;
+    padding: .7rem .45rem;
+    font-size: clamp(.84rem, 4.2cqw, 1rem) !important;
+    line-height: 1.15;
+    letter-spacing: .01em;
+}
+
+@media (max-width: 360px) {
+    nav button {
+        min-height: 52px;
+        padding: .65rem .32rem;
+        font-size: .8rem !important;
+        line-height: 1.12;
+    }
+}
+
+@supports not (font-size: 1cqw) {
+    nav button {
+        font-size: clamp(.84rem, 3.7vw, 1rem) !important;
+    }
+}
+
+
+/* Balanced tab-label sizing */
+nav button {
+    min-height: 50px;
+    padding: .58rem .34rem;
+    font-size: clamp(.76rem, 3.5cqw, .9rem) !important;
+    line-height: 1.08;
+    white-space: normal !important;
+    text-wrap: balance !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+@media (max-width: 360px) {
+    nav button {
+        min-height: 48px;
+        padding: .52rem .24rem;
+        font-size: .73rem !important;
+        line-height: 1.06;
+    }
+}
+
+@supports not (font-size: 1cqw) {
+    nav button {
+        font-size: clamp(.76rem, 3.2vw, .9rem) !important;
+    }
+}
+
+
+/* Definitive tab layout: all labels remain inside their buttons */
+nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+nav button {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    height: auto;
+    padding: .55rem .25rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+    white-space: normal !important;
+    text-wrap: wrap !important;
+    overflow-wrap: normal;
+    word-break: normal;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    font-size: 13px !important;
+    line-height: 1.08;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    text-align: center;
+}
+
+@media (max-width: 300px) {
+    nav button {
+        min-height: 54px;
+        padding-left: .15rem;
+        padding-right: .15rem;
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 760px) {
+    nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    nav button {
+        min-height: 50px;
+        font-size: 14px !important;
+    }
+}
+
+
+/* Restore uppercase tab labels only */
+nav button {
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+}
+
+@media (max-width: 300px) {
+    nav button {
+        font-size: 10px !important;
+    }
+}
+
+@media (min-width: 760px) {
+    nav button {
+        font-size: 12px !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<header>
+<h1>The Quick-Draw Guide to Playing Everyone Will Love</h1>
+<p>A fast, table-ready reference for Everyone Will Love’s class, background, race, and lore.</p>
+</header>
+
+<div class="toolbar">
+<div class="toolbar-inner">
+<nav aria-label="Main sections">
+<button type="button" data-tab="lore" onclick="openTab('lore', this)" aria-selected="true">Lore</button>
+<button type="button" data-tab="mime" onclick="openTab('mime', this)" aria-selected="false">Mime Class</button>
+<button type="button" data-tab="cannibal" onclick="openTab('cannibal', this)" aria-selected="false">Background</button>
+<button type="button" data-tab="mimic" onclick="openTab('mimic', this)" aria-selected="false">Mimic Race</button>
+</nav>
+<div class="search-wrap">
+<input id="search" type="search" aria-label="Search rules" placeholder="Search rules…"
+autocomplete="off" autocapitalize="none" spellcheck="false"
+aria-controls="search-suggestions" aria-expanded="false"
+oninput="handleSearchInput()" onfocus="showSearchSuggestions()">
+<div id="search-suggestions" class="search-suggestions" role="listbox" aria-label="Suggested rules terms"></div>
+</div>
+</div>
+</div>
+
+<main>
+<section id="lore" class="tab active">
+<div class="warning">⚠ WIP — CHARACTER LORE COMING LATER ⚠</div>
+<h2>Character Lore</h2>
+<div class="lore-empty" aria-label="Empty character lore section">
+<p>This section is intentionally empty and ready for your character’s lore.</p>
+</div>
+</section>
+
+
+
+<section id="mime" class="tab">
+<h2>Mime Class</h2>
+<p class="rule-lead">A full mobile reference for the Mime class. Tap any feature to open its complete explanation.</p>
+
+<div class="card">
+<h3>Class Basics</h3>
+<div class="rule-grid">
+<div class="rule-line"><strong>Hit Dice:</strong> 1d8 per Mime level.</div>
+<div class="rule-line"><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier.</div>
+<div class="rule-line"><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier for each Mime level after 1st.</div>
+<div class="rule-line"><strong>Armor Proficiency:</strong> Light armor.</div>
+<div class="rule-line"><strong>Weapon Proficiency:</strong> Simple weapons.</div>
+<div class="rule-line"><strong>Tool Proficiencies:</strong> Disguise kit and forgery kit.</div>
+<div class="rule-line"><strong>Saving Throws:</strong> Wisdom and Charisma.</div>
+<div class="rule-line"><strong>Skills:</strong> Choose any two skills.</div>
+</div>
+</div>
+
+<div class="card">
+<details>
+<summary>Mime Level Table</summary>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Level</th><th>Prof.</th><th>Charges</th><th>Reserve</th><th>Features</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>+2</td><td>2</td><td>—</td><td><a class="feature-link" href="#feature-echo">Echo</a>, <a class="feature-link" href="#feature-mimic">Mimic</a>, <a class="feature-link" href="#feature-sign-language">Sign Language</a></td></tr>
+<tr><td>2</td><td>+2</td><td>2</td><td>—</td><td><a class="feature-link" href="#feature-imitate">Imitate</a></td></tr>
+<tr><td>3</td><td>+2</td><td>4</td><td>—</td><td><a class="feature-link" href="#feature-art-style">Art Style</a>, <a class="feature-link" href="#feature-chameleon">Chameleon</a></td></tr>
+<tr><td>4</td><td>+2</td><td>4</td><td>1 + Int</td><td><a class="feature-link" href="#feature-asi">Ability Score Improvement</a>, <a class="feature-link" href="#feature-memory-reserve">Memory Reserve</a></td></tr>
+<tr><td>5</td><td>+3</td><td>6</td><td>1 + Int</td><td><a class="feature-link" href="#feature-extra-attack">Extra Attack</a></td></tr>
+<tr><td>6</td><td>+3</td><td>6</td><td>1 + Int</td><td><a class="feature-link" href="#feature-replicate">Replicate</a>, <a class="feature-link" href="#feature-art-style">Art Style feature</a></td></tr>
+<tr><td>7</td><td>+3</td><td>8</td><td>1 + Int</td><td>—</td></tr>
+<tr><td>8</td><td>+3</td><td>8</td><td>2 + Int</td><td><a class="feature-link" href="#feature-asi">Ability Score Improvement</a></td></tr>
+<tr><td>9</td><td>+4</td><td>10</td><td>2 + Int</td><td>—</td></tr>
+<tr><td>10</td><td>+4</td><td>10</td><td>2 + Int</td><td><a class="feature-link" href="#feature-mirror">Mirror</a></td></tr>
+<tr><td>11</td><td>+4</td><td>12</td><td>2 + Int</td><td>—</td></tr>
+<tr><td>12</td><td>+4</td><td>12</td><td>3 + Int</td><td><a class="feature-link" href="#feature-asi">Ability Score Improvement</a></td></tr>
+<tr><td>13</td><td>+5</td><td>14</td><td>3 + Int</td><td><a class="feature-link" href="#feature-art-style">Art Style feature</a></td></tr>
+<tr><td>14</td><td>+5</td><td>14</td><td>3 + Int</td><td><a class="feature-link" href="#feature-assimilate">Assimilate</a></td></tr>
+<tr><td>15</td><td>+5</td><td>16</td><td>3 + Int</td><td>—</td></tr>
+<tr><td>16</td><td>+5</td><td>16</td><td>4 + Int</td><td><a class="feature-link" href="#feature-asi">Ability Score Improvement</a></td></tr>
+<tr><td>17</td><td>+6</td><td>18</td><td>4 + Int</td><td><a class="feature-link" href="#feature-art-style">Art Style feature</a></td></tr>
+<tr><td>18</td><td>+6</td><td>18</td><td>4 + Int</td><td><a class="feature-link" href="#feature-ditto">Ditto</a></td></tr>
+<tr><td>19</td><td>+6</td><td>20</td><td>4 + Int</td><td><a class="feature-link" href="#feature-asi">Ability Score Improvement</a></td></tr>
+<tr><td>20</td><td>+6</td><td>20</td><td>5 + Int</td><td><a class="feature-link" href="#feature-pantomime">Pantomime</a></td></tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+
+<div class="card">
+<h3>Core Class Features</h3>
+
+<details id="feature-echo" class="feature-anchor"><summary>Echo — 1st Level</summary>
+<p>You can perfectly copy the sounds and movements of another creature.</p>
+<p>A creature that suspects the performance is false can make a <span class="term">Wisdom (Insight) check</span>, contested by your <span class="term">Charisma (Deception) check</span>. If the creature wins the contest, it recognizes that the imitation is fake.</p>
+</details>
+
+<details id="feature-mimic" class="feature-anchor"><summary>Mimic — 1st Level</summary>
+<p>Mimic is the class's central resource system. You gain a number of <span class="term">mimic charges</span> based on your Mime level. You spend these charges to activate many Mime features, and regain all expended charges when you finish a <span class="term">long rest</span>.</p>
+<p>You normally must concentrate on one mimic feature at a time, so you cannot keep a second mimic feature active while already concentrating on one.</p>
+<p>Copied abilities normally last until your next turn. If the copied ability could continue, you may spend another charge at the beginning of your next turn to maintain it.</p>
+<p>You cannot copy an ability you already know.</p>
+<span class="formula">Mimic save DC = 8 + proficiency bonus + Charisma modifier</span>
+<span class="formula">Mimic attack modifier = proficiency bonus + Charisma modifier</span>
+<span class="formula">Creature save DC = 5 + creature level or challenge rating</span>
+</details>
+
+<details><summary>Emulate — Mimic Option</summary>
+<p>When you use an item with which you are not proficient, you may spend 1 mimic charge to borrow another creature's proficiency with that item until the beginning of your next turn.</p>
+<p>When you make the relevant attack or use the borrowed proficiency, use your Mimic attack modifier. Replace the original Strength, Dexterity, or other ability modifier with your Charisma modifier.</p>
+</details>
+
+<details><summary>Likeness — Mimic Option</summary>
+<p>When you make a skill check or ability check, you may spend 1 mimic charge to use another creature's statistics for that roll instead of your own.</p>
+<p>This feature does not work on saving throws.</p>
+</details>
+
+<details id="feature-sign-language" class="feature-anchor"><summary>Sign Language — 1st Level</summary>
+<p>Your training includes a system of hand signs. You can silently communicate in any language in which you are literate, provided the observer understands that language.</p>
+<p>You may also use these signs in place of speech when using spells or items that would normally require spoken words.</p>
+</details>
+
+<details id="feature-imitate" class="feature-anchor"><summary>Imitate — 2nd Level</summary>
+<p>Immediately after a creature uses an ability tied to its knowledge, feat, or class, you may spend 1 mimic charge and use your reaction to try to copy it.</p>
+<p>Make a Wisdom (Perception) check against the creature's save DC. On a success, you gain the copied feat or class-specific ability until the end of your next turn.</p>
+<p>When the copied ability makes an attack, use your Mimic attack modifier and use Charisma in place of the original ability modifier.</p>
+<p>You cannot use Imitate to copy a creature's spellcasting ability.</p>
+</details>
+
+<details id="feature-art-style" class="feature-anchor"><summary>Art Style — 3rd Level</summary>
+<p>You choose an art style that determines how your mimicry develops. This character reference currently includes the <span class="term">Umbra Arts</span> progression.</p>
+<p>Your chosen style grants features at 3rd, 6th, 13th, and 17th levels.</p>
+</details>
+
+<details id="feature-chameleon" class="feature-anchor"><summary>Chameleon — 3rd Level</summary>
+<p>After seeing a creature or object close to your size—up to one size larger or smaller—you may spend 1 mimic charge and use your reaction to copy its appearance.</p>
+<p>The transformation works like <span class="term">disguise self</span> and lasts for 1 hour or until you dismiss it.</p>
+<p>A creature can use its action to inspect you. It recognizes the disguise as false if it succeeds on an Intelligence (Investigation) check against your Mimic save DC.</p>
+</details>
+
+<details id="feature-asi" class="feature-anchor"><summary>Ability Score Improvement — Levels 4, 8, 12, 16, and 19</summary>
+<p>Increase one ability score by 2, or increase two ability scores by 1 each.</p>
+<p>You normally cannot raise an ability score above 20 using this feature.</p>
+</details>
+
+<details id="feature-memory-reserve" class="feature-anchor"><summary>Memory Reserve — 4th Level</summary>
+<p>After using a mimic feature, you may store that copied ability in a memory reserve. A stored mimic becomes permanently available to you until you remove it.</p>
+<p>Using a stored ability still costs the same number of mimic charges that copying it originally required.</p>
+<p>After you use a stored mimic, that reserve becomes locked until you finish a short or long rest.</p>
+<p>You may dismiss a stored mimic from a reserve as a free action. Your number of reserves is shown in the class table and is modified by your Intelligence modifier.</p>
+</details>
+
+<details id="feature-extra-attack" class="feature-anchor"><summary>Extra Attack — 5th Level</summary>
+<p>Whenever you take the Attack action on your turn, you can make two attacks instead of one.</p>
+</details>
+
+<details id="feature-replicate" class="feature-anchor"><summary>Replicate — 6th Level</summary>
+<p>Immediately after a creature uses an ability specific to its species or race, you may spend 2 mimic charges and use your reaction to try to copy it.</p>
+<p>Make a Wisdom (Perception) check against the creature's save DC. On a success, you gain the ability until the end of your next turn.</p>
+<p>Use your Mimic attack modifier for attacks and Charisma instead of the original ability modifier.</p>
+<p>You can normally copy creatures within one size category of your own. A copied form or effect from a more extreme size is visually scaled to your relative size.</p>
+<p>You cannot copy spells, Multiattack, legendary actions, or lair actions with Replicate.</p>
+</details>
+
+<details id="feature-mirror" class="feature-anchor"><summary>Mirror — 10th Level</summary>
+<p>When a creature attacks you, you may spend 4 mimic charges and use your reaction before the attack roll.</p>
+<p>Make a Wisdom (Perception) check against the attacker's creature save DC. On a success, your base Armor Class becomes equal to the attacker's base Armor Class until the beginning of your next turn.</p>
+</details>
+
+<details id="feature-assimilate" class="feature-anchor"><summary>Assimilate — 14th Level</summary>
+<p>Immediately after a creature casts a spell of 1st level or higher, you may use your reaction and spend 1 mimic charge per level of the spell.</p>
+<p>Make a Wisdom (Perception) check against the creature's save DC. On a success, you can cast that spell until the beginning of your next turn.</p>
+<p>The spell's material, verbal, and somatic requirements are treated as already fulfilled. Use your Mimic save DC and Mimic attack modifier for the copied spell.</p>
+</details>
+
+<details id="feature-ditto" class="feature-anchor"><summary>Ditto — 18th Level</summary>
+<p>Once per day, you can spend 12 mimic charges and use your action to transform into a creature you can see that is no more than one size smaller or larger than you.</p>
+<p>You must succeed on an Intelligence (Investigation) check against the target's creature save DC.</p>
+<p>Your game statistics are replaced by the new form's statistics, but you retain your alignment, personality, Intelligence, Wisdom, Charisma, current hit points, and Hit Dice.</p>
+<p>If the form drops to 0 hit points, you return to your original form and fall unconscious. Your available actions are limited by the anatomy of the new form. Your equipment merges into the form and cannot be used.</p>
+<p>The transformation lasts 1 minute, until you reach 0 hit points, or until you dismiss it with an action.</p>
+</details>
+
+<details id="feature-pantomime" class="feature-anchor"><summary>Pantomime — 20th Level</summary>
+<p>When you roll initiative and have no mimic charges remaining, you regain 4 mimic charges.</p>
+</details>
+</div>
+
+
+<div class="card">
+<h3>Umbra Arts</h3>
+<p class="rule-lead">A style focused on shadows, deception, control, and fear.</p>
+
+<details><summary>Shadow Possession — 3rd Level</summary>
+<p>Use your action to project your shadow up to 20 feet toward a creature.</p>
+<p>An unwilling creature makes a Constitution check against your Mimic save DC. On a failure, its movements mirror yours for up to 1 minute. For example, if you punch yourself, the possessed creature also performs that motion.</p>
+<p>You cannot attack while controlling the creature. Creatures more than one size larger than you may be affected with limitations decided by the DM.</p>
+</details>
+
+<details><summary>Silhouette — 6th Level</summary>
+<p>Whenever you hit with a melee attack, your shadow makes a second attack.</p>
+<p>The silhouette makes its own attack roll using the weapon's statistics. Its damage is half the original attack's damage, rounded down.</p>
+</details>
+
+<details><summary>Dead Ringer — 13th Level</summary>
+<p>Once per long rest, when a fatal attack targets you, you may use your reaction to leave a lifeless duplicate in your place.</p>
+<p>The duplicate receives the attack while you retreat into the shadows and become invisible as though affected by the invisibility spell.</p>
+<p>A creature realizes you survived if it succeeds on a Wisdom (Perception) check contested by your Charisma (Deception) check.</p>
+</details>
+
+<details><summary>Afraid of Your Own Shadow — 17th Level</summary>
+<p>Once per long rest, use your action to force up to 10 chosen creatures within 50 feet to confront a vision of their worst fear.</p>
+<p>Each target makes a Wisdom saving throw against your Mimic save DC. On a failure, it takes 4d10 psychic damage and becomes frightened.</p>
+<p>At the start of each frightened creature's turn, it repeats the saving throw. On a failure, it takes another 4d10 psychic damage. On a success, the effect ends for that creature.</p>
+</details>
+</div>
+
+
+
+<div class="card">
+<h3>Rules Glossary</h3>
+<details><summary>Action</summary><p>Your main activity on your turn, such as attacking, casting many spells, or using certain features.</p></details>
+<details><summary>Bonus Action</summary><p>A smaller action available only when a rule specifically says it uses a bonus action. You normally get at most one per turn.</p></details>
+<details><summary>Reaction</summary><p>An immediate response to a trigger. You normally get one reaction between the start of your turn and the start of your next turn.</p></details>
+<details><summary>Armor Class (AC)</summary><p>The number an attack roll must meet or exceed to hit a creature.</p></details>
+<details><summary>Attack Modifier</summary><p>The bonus added to an attack roll.</p></details>
+<details><summary>Saving Throw</summary><p>A defensive roll made to resist a harmful effect. The roll must meet or exceed the effect's save DC.</p></details>
+<details><summary>Save DC</summary><p>The target number a creature must meet or exceed on a saving throw.</p></details>
+<details><summary>Ability Check</summary><p>A roll using an ability score, sometimes with a skill proficiency, to determine whether a creature succeeds at a task.</p></details>
+<details><summary>Contested Check</summary><p>Two creatures roll against each other. The higher result wins.</p></details>
+<details><summary>Proficiency Bonus</summary><p>A level-based bonus added when your character is proficient with the relevant weapon, skill, saving throw, or tool.</p></details>
+<details><summary>Concentration</summary><p>Maintaining an ongoing effect. Normally, starting another concentration effect ends the first, and damage may force a Constitution saving throw to maintain it.</p></details>
+<details><summary>Short Rest</summary><p>A period of downtime, normally at least 1 hour, during which characters may use Hit Dice and recover features that recharge on a short rest.</p></details>
+<details><summary>Long Rest</summary><p>An extended rest, normally at least 8 hours, that restores many class resources and hit points according to the game's resting rules.</p></details>
+<details><summary>Initiative</summary><p>The roll that determines turn order when combat begins.</p></details>
+<details><summary>Hidden</summary><p>A creature whose location is not known to an enemy. Hidden attackers commonly gain advantage, though the exact result depends on sight and positioning.</p></details>
+<details><summary>Lightly Obscured</summary><p>An area with limited visibility, such as dim light, patchy fog, or foliage. It usually imposes disadvantage on sight-based Perception checks.</p></details>
+<details><summary>Dim Light and Darkness</summary><p>Dim light is partial illumination. Darkness is heavily obscured and normally prevents sight without darkvision or another special sense.</p></details>
+<details><summary>Frightened</summary><p>A frightened creature has disadvantage on ability checks and attack rolls while the source of fear is visible, and it cannot willingly move closer to that source.</p></details>
+<details><summary>Invisible</summary><p>An invisible creature cannot be seen without special senses or magic. Attacks against it usually have disadvantage, while its attacks usually have advantage.</p></details>
+<details><summary>Incapacitated</summary><p>An incapacitated creature cannot take actions or reactions.</p></details>
+<details><summary>Psychic, Necrotic, and Magical Damage</summary><p>Psychic damage harms the mind. Necrotic damage withers life energy. “Magical damage” means the damage is treated as magical for rules that distinguish magical and nonmagical damage.</p></details>
+<details><summary>Challenge Rating</summary><p>A rating used to estimate a monster's combat strength. This class also uses it to calculate a creature's save DC.</p></details>
+<details><summary>DM</summary><p>The Dungeon Master, who runs the world, controls nonplayer creatures, and decides unclear or discretionary rules.</p></details>
+</div>
+</section>
+
+
+
+<section id="cannibal" class="tab">
+<h2>Cannibal Background</h2>
+<p class="rule-lead">A complete reference for the character background and its terms.</p>
+
+<div class="card">
+<details open><summary>Background Description</summary>
+<p>Your character's life has been deeply shaped by consuming forbidden flesh. The practice might be religious, cultural, practical, desperate, criminal, or driven by personal obsession.</p>
+<p>This background assumes cannibalism is central to the character's history and identity, rather than a minor habit. It may have influenced the character's beliefs, reputation, goals, relationships, and place in society.</p>
+</details>
+
+<details><summary>Skill Proficiencies</summary>
+<p><span class="term">Survival:</span> Used for tracking, hunting, navigating wilderness, predicting hazards, and obtaining food.</p>
+<p><span class="term">Deception:</span> Used to hide the truth, maintain false identities, mislead others, and tell convincing lies.</p>
+</details>
+
+<details><summary>Tool Proficiency — Cook's Utensils</summary>
+<p>You are proficient with Cook's Utensils. Proficiency allows you to add your proficiency bonus when a task involving these tools calls for a relevant ability check.</p>
+</details>
+
+<details><summary>Starting Equipment</summary>
+<ul>
+<li>A set of traveler's clothes.</li>
+<li>Two knives.</li>
+<li>A recipe book describing how to safely prepare various peoples for consumption.</li>
+<li>A belt pouch containing 5 gp.</li>
+</ul>
+<p><span class="term">gp</span> means gold pieces, the game's standard currency.</p>
+</details>
+
+<details><summary>Those of a Different Taste</summary>
+<p>You have shady contacts who deal in forbidden food and other illegal goods. These contacts may know about smugglers, poison dealers, criminal safe houses, black-market routes, and similar underworld activity.</p>
+<p>The feature provides information and access to contacts. It does not automatically pay for your lifestyle, provide free goods, or guarantee that criminals will help without risk or payment.</p>
+</details>
+</div>
+</section>
+
+
+
+<section id="mimic" class="tab">
+<div class="warning">⚠ SUBJECT TO CHANGE — HUMANOID MIMIC RULES MAY BE REWORKED ⚠</div>
+<h2>Humanoid Mimic Race</h2>
+<p class="rule-lead">A full reference for the base ancestry and both subraces.</p>
+
+<div class="card">
+<details open><summary>Humanoid Mimic Overview</summary>
+<p>A humanoid mimic is an unusually intelligent mimic capable of taking humanoid form. Unlike ordinary mimics, it may seek companionship, culture, and adventure instead of living only as a solitary predator.</p>
+</details>
+
+<details><summary>Physical Description</summary>
+<p>The true body is an amorphous mass with small eyes. A humanoid mimic may treat a humanoid appearance, or a variation of it, as its everyday form.</p>
+<p>When changing form, it reshapes its mass and surface texture. Many humanoid mimics hide equipment inside their bodies and wear layered clothing or armor to conceal their monstrous nature.</p>
+</details>
+
+<details><summary>Names</summary>
+<p>Humanoid mimics rarely meet others of their kind, so they usually borrow names from cultures they encounter. A name may come from a person, object, nickname, emotion, joke, or insult.</p>
+<p>Example names include Leaf, Bog, Shifts, Bocks, Sax, Alder, Nu, Canteen, Mimi, Brauther, Curio, Tabler, and Chester.</p>
+</details>
+</div>
+
+<div class="card">
+<h3>Base Traits</h3>
+<details><summary>Ability Score Increase</summary><p>Your Constitution score increases by 1. Constitution represents endurance, health, and physical resilience.</p></details>
+<details><summary>Age</summary><p>Mimics reach maturity at about 10 years old and can live for approximately a century.</p></details>
+<details><summary>Alignment</summary><p>Humanoid mimics tend toward neutrality but may adopt the values of a culture or individual. Alignment is a broad description of moral and ethical outlook.</p></details>
+<details><summary>Size</summary><p>Your true form is amorphous but can rise to roughly 6 feet tall. Your game size is Medium.</p></details>
+<details><summary>Speed</summary><p>Your base walking speed is 25 feet. This is the normal distance you can move on your turn without using the Dash action.</p></details>
+<details><summary>Darkvision</summary><p>You see in dim light within 60 feet as though it were bright light, and in darkness as though it were dim light. In darkness, you see only shades of gray.</p></details>
+<details><summary>Adhesive Pseudopods</summary><p>You have advantage on checks made to grapple a creature. A grapple normally prevents the target from moving away until it escapes.</p></details>
+<details><summary>Monstrosity</summary><p>Your creature type counts as both humanoid and monstrosity. Effects that refer to either type may apply to you.</p></details>
+<details><summary>Languages</summary><p>You can speak, read, and understand Mimic, Undercommon, and one additional language of your choice.</p></details>
+</div>
+
+<div class="card">
+<h3>Objectoid Subrace</h3>
+<details><summary>Objectoid Overview</summary><p>An Objectoid retains the traditional mimic talent for impersonating objects and hiding in plain sight.</p></details>
+<details><summary>Ability Score Increase</summary><p>Your Wisdom score increases by 1. Wisdom represents awareness, intuition, and practical judgment.</p></details>
+<details><summary>Molded Body</summary>
+<p>Your body does not benefit from worn armor. Instead, your Armor Class equals 12 + your Constitution modifier.</p>
+<p>You are immune to being knocked prone. You may still use a shield and wear items on your arms, hands, or legs when your current shape reasonably supports them.</p>
+<p>At 3rd level, you become immune to acid damage.</p>
+<p>At 5th level, you may cast barkskin on yourself once without material components. You regain this use after a long rest. Barkskin prevents your AC from being lower than the value specified by the spell while it lasts.</p>
+</details>
+<details><summary>Stake Out</summary><p>You gain proficiency in Stealth and Perception. Stealth is used to hide or move silently; Perception is used to notice creatures, objects, sounds, and danger.</p></details>
+<details><summary>Inanimate Shapechanger</summary>
+<p>As an action, you may transform into a Small or Medium inanimate object you have seen, or return to your true form.</p>
+<p>While motionless, you are indistinguishable from a normal object. If the object could reasonably conceal your lack of movement, you remain indistinguishable under those circumstances as well.</p>
+<p>When transforming, equipment may fall to the ground, be stored inside you when the shape has room, or remain usable when the form reasonably permits it. Armor cannot be used this way.</p>
+<p>You keep your normal game statistics. If you die, you return to your true form.</p>
+</details>
+</div>
+
+<div class="card">
+<h3>Beastoid Subrace</h3>
+<details><summary>Beastoid Overview</summary><p>A Beastoid abandons traditional object camouflage in favor of a large, grotesque, predatory battle form.</p></details>
+<details><summary>Ability Score Increase</summary><p>Your Strength score increases by 1. Strength represents physical power, lifting ability, and force.</p></details>
+<details><summary>Natural Weapons</summary>
+<p>In humanoid form, you gain no benefit from weapon proficiencies.</p>
+<p>In your transformed form, your unarmed strikes deal 1d8 + your Strength modifier as bludgeoning, piercing, or slashing damage.</p>
+<p>At 3rd level, after making an unarmed strike, you may make another unarmed strike as a bonus action.</p>
+<p>At 5th level, you may cast magic weapon on your unarmed strikes once without material components, regaining the use after a long rest. Magic weapon grants a magical bonus to attack and damage rolls for the affected weapon.</p>
+</details>
+<details><summary>Hunter</summary><p>You gain proficiency in Athletics and Survival. Athletics covers climbing, jumping, swimming, grappling, and other feats of physical force.</p></details>
+<details><summary>Feral Shapechanger</summary>
+<p>As an action, you may transform into a Large form or return to your true form.</p>
+<p>While Large, you have a climbing speed of 30 feet. A climbing speed lets you move across climbable surfaces without paying the normal extra movement cost.</p>
+<p>You retain your normal game statistics. If you die, you return to your true form.</p>
+</details>
+</div>
+
+<div class="card">
+<h3>Race Glossary</h3>
+<details><summary>Advantage</summary><p>Roll two d20s and use the higher result.</p></details>
+<details><summary>Grappled</summary><p>A grappled creature's speed becomes 0. The condition ends when the grappler is incapacitated or the target escapes.</p></details>
+<details><summary>Prone</summary><p>A prone creature lies on the ground. Its movement is limited, nearby attackers gain an advantage against it, and its own attacks are hindered until it stands.</p></details>
+<details><summary>Damage Immunity</summary><p>You take no damage of the stated type.</p></details>
+<details><summary>Innate Spellcasting</summary><p>The ability to cast a specific spell because of a racial or natural trait rather than a spellcasting class.</p></details>
+<details><summary>Material Components</summary><p>Physical items normally required to cast some spells. A rule that removes this requirement lets you cast without those items.</p></details>
+<details><summary>Creature Type</summary><p>A category such as humanoid, beast, undead, or monstrosity. Some spells and abilities affect only particular types.</p></details>
+<details><summary>Polymorph / Shapechange</summary><p>Changing physical form. The feature itself states which statistics, equipment, and abilities change or remain.</p></details>
+</div>
+</section>
+
+</main>
+
+<script>
+const searchIndex = [];
+let activeSuggestionIndex = -1;
+
+function openTab(id, button, keepSearch = false){
+ document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+ document.querySelectorAll('nav button').forEach(btn => btn.setAttribute('aria-selected', 'false'));
+ const tab = document.getElementById(id);
+ if (tab) tab.classList.add('active');
+ if (button) button.setAttribute('aria-selected', 'true');
+ resetSearch();
+ if (!keepSearch) document.getElementById('search').value = '';
+ hideSearchSuggestions();
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ requestAnimationFrame(fitTabLabels);
+}
+
+function resetSearch(){
+ document.querySelectorAll('.tab .card, .tab details').forEach(el => {
+   el.style.display = '';
+   if (el.tagName === 'DETAILS') el.open = false;
+ });
+}
+
+function elementSearchText(element){
+ return `${element.innerText || ''} ${element.dataset.searchAliases || ''}`
+   .replace(/\s+/g, ' ')
+   .toLowerCase();
+}
+
+function searchPage(){
+ const value = document.getElementById('search').value.trim().toLowerCase();
+ const active = document.querySelector('.tab.active');
+ if (!active) return;
+
+ active.querySelectorAll('.card, details').forEach(element => {
+   element.style.display = '';
+ });
+ if (!value) return;
+
+ active.querySelectorAll('details').forEach(detail => {
+   const match = elementSearchText(detail).includes(value);
+   detail.style.display = match ? '' : 'none';
+   if (match) detail.open = true;
+ });
+
+ active.querySelectorAll('.card').forEach(card => {
+   const visibleDetails = [...card.querySelectorAll(':scope > details')]
+     .some(detail => detail.style.display !== 'none');
+   const directText = [...card.childNodes]
+     .filter(node => node.nodeType === Node.TEXT_NODE ||
+       (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'DETAILS'))
+     .map(node => node.innerText || node.textContent || '')
+     .join(' ');
+   const aliases = card.dataset.searchAliases || '';
+   const match = `${directText} ${aliases}`.toLowerCase().includes(value);
+   card.style.display = visibleDetails || match ? '' : 'none';
+ });
+}
+
+function slugify(value){
+ return value.toLowerCase()
+   .replace(/[^a-z0-9]+/g, '-')
+   .replace(/^-+|-+$/g, '')
+   .slice(0, 56) || 'term';
+}
+
+function ordinal(number){
+ const value = Number(number);
+ const mod100 = value % 100;
+ if (mod100 >= 11 && mod100 <= 13) return `${value}th`;
+ switch (value % 10) {
+   case 1: return `${value}st`;
+   case 2: return `${value}nd`;
+   case 3: return `${value}rd`;
+   default: return `${value}th`;
+ }
+}
+
+function addSearchAliases(element, aliases){
+ if (!element || !aliases) return;
+ const existing = element.dataset.searchAliases || '';
+ element.dataset.searchAliases = `${existing} ${aliases}`
+   .replace(/\s+/g, ' ')
+   .trim();
+}
+
+function addSearchItem({ label, sectionName, tabId, target, keywords = '', context = '' }, seen){
+ if (!label || !target) return;
+
+ const normalizedLabel = label.replace(/\s+/g, ' ').trim();
+ if (!target.id) {
+   target.id = `term-${tabId}-${slugify(normalizedLabel)}-${searchIndex.length}`;
+ }
+
+ const key = `${tabId}|${target.id}|${normalizedLabel.toLowerCase()}`;
+ if (seen.has(key)) return;
+ seen.add(key);
+
+ target.classList.add('search-index-target');
+ const combinedKeywords = `${normalizedLabel} ${keywords}`.replace(/\s+/g, ' ').trim();
+ addSearchAliases(target, combinedKeywords);
+ addSearchAliases(target.closest('details'), combinedKeywords);
+ addSearchAliases(target.closest('.card'), combinedKeywords);
+
+ searchIndex.push({
+   label: normalizedLabel,
+   sectionName,
+   context,
+   tabId,
+   targetId: target.id,
+   keywords: combinedKeywords
+ });
+}
+
+function buildSearchIndex(){
+ searchIndex.length = 0;
+ const seen = new Set();
+
+ document.querySelectorAll('.tab').forEach(tab => {
+   const tabId = tab.id;
+   const tabButton = document.querySelector(`nav button[data-tab="${tabId}"]`);
+   const sectionName = tabButton ? tabButton.textContent.trim() : tabId;
+
+   tab.querySelectorAll('details > summary').forEach((summary, index) => {
+     const label = summary.textContent.replace(/\s+/g, ' ').trim();
+     const detail = summary.parentElement;
+     if (!detail.id) detail.id = `term-${tabId}-${slugify(label)}-${index}`;
+
+     const levelNumbers = label.toLowerCase().includes('level')
+       ? [...label.matchAll(/\b\d+\b/g)].map(match => match[0])
+       : [];
+     const levelAliases = levelNumbers
+       .map(level => `level ${level} ${ordinal(level)} level class level ${level}`)
+       .join(' ');
+
+     addSearchItem({
+       label,
+       sectionName,
+       context: levelNumbers.length ? 'Class Feature' : sectionName,
+       tabId,
+       target: detail,
+       keywords: levelAliases
+     }, seen);
+   });
+
+   tab.querySelectorAll('.rule-line').forEach((line, index) => {
+     const strong = line.querySelector('strong');
+     const name = strong
+       ? strong.textContent.replace(/:\s*$/, '').trim()
+       : line.textContent.replace(/\s+/g, ' ').trim();
+     const fullText = line.textContent.replace(/\s+/g, ' ').trim();
+     if (!line.id) line.id = `term-${tabId}-basic-${slugify(name)}-${index}`;
+
+     addSearchItem({
+       label: name,
+       sectionName,
+       context: 'Class Basics',
+       tabId,
+       target: line,
+       keywords: `${fullText} class basic class basics`
+     }, seen);
+   });
+
+   tab.querySelectorAll('.formula').forEach((formula, index) => {
+     const fullText = formula.textContent.replace(/\s+/g, ' ').trim();
+     const name = fullText.split('=')[0].trim() || fullText;
+     if (!formula.id) formula.id = `term-${tabId}-formula-${slugify(name)}-${index}`;
+
+     addSearchItem({
+       label: name,
+       sectionName,
+       context: 'Formula',
+       tabId,
+       target: formula,
+       keywords: fullText
+     }, seen);
+   });
+
+   tab.querySelectorAll('table tbody tr').forEach(row => {
+     const cells = [...row.cells].map(cell =>
+       cell.textContent.replace(/\s+/g, ' ').trim()
+     );
+     if (!cells.length) return;
+
+     const levelNumber = cells[0].match(/\d+/)?.[0];
+     if (!levelNumber) return;
+
+     const featureText = cells[4] && cells[4] !== '—'
+       ? cells[4]
+       : 'No new feature';
+     const label = `${ordinal(levelNumber)} Level — ${featureText}`;
+     if (!row.id) row.id = `class-level-${levelNumber}`;
+
+     addSearchItem({
+       label,
+       sectionName,
+       context: 'Class Level',
+       tabId,
+       target: row,
+       keywords: [
+         `level ${levelNumber}`,
+         `${ordinal(levelNumber)} level`,
+         `class level ${levelNumber}`,
+         `proficiency bonus ${cells[1] || ''}`,
+         `mimic charges ${cells[2] || ''}`,
+         `memory reserve ${cells[3] || ''}`,
+         featureText
+       ].join(' ')
+     }, seen);
+   });
+
+   const heading = tab.querySelector('h2');
+   if (heading) {
+     const label = heading.textContent.replace(/\s+/g, ' ').trim();
+     if (!heading.id) heading.id = `term-${tabId}-${slugify(label)}`;
+
+     addSearchItem({
+       label,
+       sectionName,
+       context: sectionName,
+       tabId,
+       target: heading,
+       keywords: label
+     }, seen);
+   }
+ });
+}
+
+function getSuggestions(query){
+ const normalized = query.trim().toLowerCase();
+ if (!normalized) return [];
+
+ return searchIndex
+   .map(item => {
+     const label = item.label.toLowerCase();
+     const haystack = `${item.label} ${item.keywords || ''}`.toLowerCase();
+     let rank = 4;
+
+     if (label === normalized) rank = 0;
+     else if (label.startsWith(normalized)) rank = 1;
+     else if (haystack.split(/\s+/).some(word => word.startsWith(normalized))) rank = 2;
+     else if (haystack.includes(normalized)) rank = 3;
+
+     return { item, rank, haystack };
+   })
+   .filter(result => result.haystack.includes(normalized))
+   .sort((a, b) =>
+     a.rank - b.rank ||
+     a.item.label.localeCompare(b.item.label)
+   )
+   .slice(0, 10)
+   .map(result => result.item);
+}
+
+function renderSearchSuggestions(){
+ const input = document.getElementById('search');
+ const box = document.getElementById('search-suggestions');
+ const query = input.value.trim();
+
+ activeSuggestionIndex = -1;
+ box.innerHTML = '';
+
+ if (!query) {
+   hideSearchSuggestions();
+   return;
+ }
+
+ const suggestions = getSuggestions(query);
+ if (!suggestions.length) {
+   const empty = document.createElement('div');
+   empty.className = 'search-no-results';
+   empty.textContent = 'No matching terms';
+   box.appendChild(empty);
+ } else {
+   suggestions.forEach((item, index) => {
+     const option = document.createElement('button');
+     option.type = 'button';
+     option.className = 'search-suggestion';
+     option.setAttribute('role', 'option');
+     option.dataset.index = String(index);
+
+     const name = document.createElement('span');
+     name.className = 'search-suggestion-name';
+     name.textContent = item.label;
+
+     const section = document.createElement('span');
+     section.className = 'search-suggestion-section';
+     section.textContent = item.context || item.sectionName;
+
+     option.append(name, section);
+     option.addEventListener('mousedown', event => event.preventDefault());
+     option.addEventListener('click', () => selectSearchSuggestion(item));
+     box.appendChild(option);
+   });
+ }
+
+ box.classList.add('visible');
+ input.setAttribute('aria-expanded', 'true');
+}
+
+function handleSearchInput(){
+ searchPage();
+ renderSearchSuggestions();
+}
+
+function showSearchSuggestions(){
+ if (document.getElementById('search').value.trim()) renderSearchSuggestions();
+}
+
+function hideSearchSuggestions(){
+ const box = document.getElementById('search-suggestions');
+ if (!box) return;
+ box.classList.remove('visible');
+ document.getElementById('search').setAttribute('aria-expanded', 'false');
+ activeSuggestionIndex = -1;
+}
+
+function selectSearchSuggestion(item){
+ const button = document.querySelector(`nav button[data-tab="${item.tabId}"]`);
+ openTab(item.tabId, button, true);
+
+ const input = document.getElementById('search');
+ input.value = item.label;
+ resetSearch();
+
+ const target = document.getElementById(item.targetId);
+ if (target) {
+   const parentDetails = target.tagName === 'DETAILS'
+     ? target
+     : target.closest('details');
+   if (parentDetails) parentDetails.open = true;
+
+   const parentCard = target.closest('.card');
+   if (parentCard) parentCard.style.display = '';
+   target.style.display = '';
+
+   target.classList.remove('search-flash');
+   void target.offsetWidth;
+   target.classList.add('search-flash');
+
+   requestAnimationFrame(() => target.scrollIntoView({
+     behavior: 'smooth',
+     block: 'center'
+   }));
+ }
+
+ hideSearchSuggestions();
+}
+
+function moveSuggestionSelection(direction){
+ const options = [...document.querySelectorAll('.search-suggestion')];
+ if (!options.length) return;
+
+ activeSuggestionIndex =
+   (activeSuggestionIndex + direction + options.length) % options.length;
+
+ options.forEach((option, index) => {
+   const active = index === activeSuggestionIndex;
+   option.classList.toggle('active', active);
+   option.setAttribute('aria-selected', String(active));
+ });
+ options[activeSuggestionIndex].scrollIntoView({ block: 'nearest' });
+}
+
+function fitTabLabels(){
+ // Tab sizes are controlled entirely by the final responsive CSS rules.
+}
+
+document.getElementById('search').addEventListener('keydown', event => {
+ const box = document.getElementById('search-suggestions');
+ const options = [...box.querySelectorAll('.search-suggestion')];
+
+ if (event.key === 'ArrowDown') {
+   event.preventDefault();
+   if (!box.classList.contains('visible')) renderSearchSuggestions();
+   moveSuggestionSelection(1);
+ } else if (event.key === 'ArrowUp') {
+   event.preventDefault();
+   if (!box.classList.contains('visible')) renderSearchSuggestions();
+   moveSuggestionSelection(-1);
+ } else if (event.key === 'Enter' && activeSuggestionIndex >= 0 && options[activeSuggestionIndex]) {
+   event.preventDefault();
+   options[activeSuggestionIndex].click();
+ } else if (event.key === 'Escape') {
+   hideSearchSuggestions();
+ }
+});
+
+document.addEventListener('click', event => {
+ if (!event.target.closest('.search-wrap')) hideSearchSuggestions();
+});
+
+window.addEventListener('resize', fitTabLabels);
+
+document.addEventListener('DOMContentLoaded', () => {
+ buildSearchIndex();
+ fitTabLabels();
+});
+
+document.addEventListener('click', function(event) {
+ const link = event.target.closest('a[href^="#feature-"]');
+ if (!link) return;
+ const target = document.querySelector(link.getAttribute('href'));
+ if (target && target.tagName === 'DETAILS') {
+   target.open = true;
+ }
+});
+window.addEventListener('hashchange', function() {
+ const target = document.querySelector(location.hash);
+ if (target && target.tagName === 'DETAILS') target.open = true;
+});
+if (location.hash) {
+ const target = document.querySelector(location.hash);
+ if (target && target.tagName === 'DETAILS') target.open = true;
+}
+
+</script>
+
+</body>
+</html>
